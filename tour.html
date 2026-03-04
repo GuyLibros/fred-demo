@@ -1,1 +1,64 @@
+<!doctype html>
+<html>
+<head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <title>Guided Screenshot Tour</title>
+
+
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.css">
+ <style>
+   .wrap { max-width: 900px; margin: 24px auto; font-family: system-ui, sans-serif; }
+   .shot { position: relative; }
+   .shot img { width: 100%; height: auto; display:block; border: 1px solid #ddd; border-radius: 10px; }
+   /* Invisible boxes we highlight */
+   .box { position:absolute; border-radius: 8px; }
+   #nav { left: 4%; top: 14%; width: 20%; height: 65%; }
+   #search { left: 32%; top: 12%; width: 64%; height: 18%; }
+   #export { left: 78%; top: 84%; width: 18%; height: 10%; }
+ </style>
+</head>
+<body>
+ <div class="wrap">
+   <h1>Guided Screenshot Tour</h1>
+   <button id="start">Start tour</button>
+
+
+   <div class="shot" style="margin-top:16px;">
+     <img src="assets/img/dashboard-01.png" alt="Dashboard screenshot">
+     <div id="nav" class="box" aria-label="Navigation"></div>
+     <div id="search" class="box" aria-label="Search"></div>
+     <div id="export" class="box" aria-label="Export"></div>
+   </div>
+ </div>
+
+
+ <script src="https://cdn.jsdelivr.net/npm/driver.js@1.3.1/dist/driver.js.iife.js"></script>
+ <script>
+   const driver = window.driver.js.driver;
+
+
+   const tour = driver({
+     showProgress: true,
+     steps: [
+       {
+         element: "#nav",
+         popover: { title: "Navigation", description: "Use this menu to move between sections." }
+       },
+       {
+         element: "#search",
+         popover: { title: "Search", description: "Enter your query and filter here." }
+       },
+       {
+         element: "#export",
+         popover: { title: "Export", description: "Download results from here." }
+       }
+     ]
+   });
+
+
+   document.getElementById("start").addEventListener("click", () => tour.drive());
+ </script>
+</body>
+</html>
 
